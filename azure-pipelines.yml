@@ -71,11 +71,7 @@ jobs:
       sudo ln -s -f /cif/softwarelib /mnt/software-lib
     displayName: 'Bash Script: Mount File Shares specific for Spinnaker'
     condition: eq(variables['mountFileShare'], true)
-  
-  # Go to the path
-  - script: cd cpp
-    displayName: 'Go to the c++ directory'
-  
+    
   # Run make
   - script: make
     displayName: 'Command Line Script: Run make'  
