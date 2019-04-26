@@ -85,6 +85,7 @@ jobs:
     displayName: 'Check where I am'    
   
   - script: make
+    workingDirectory: $(Build.SourcesDirectory)\cpp
     displayName: 'Command Line Script: Run make'  
 
   # Check where I am
