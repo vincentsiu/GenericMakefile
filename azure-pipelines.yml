@@ -29,9 +29,9 @@ jobs:
   # Currently, build step fails immediately because it does not wait for agent to become available before running build.
   # The delay task is a temporary fix.
   - task: Delay@1
-    displayName: 'Delay by 3 minutes. Waiting for agent to connect to Azure DevOps...'
+    displayName: 'Delay by 5 minutes. Waiting for agent to connect to Azure DevOps...'
     inputs:
-      delayForMinutes: 3
+      delayForMinutes: 5
 
 #####################################################################################################################################
 # Agent build phase: Run example cpp job (https://github.com/adventworks/cpp-gpp-sample)
@@ -71,8 +71,10 @@ jobs:
       sudo ln -s -f /cif/softwarelib /mnt/software-lib
     displayName: 'Bash Script: Mount File Shares specific for Spinnaker'
     condition: eq(variables['mountFileShare'], true)
+  # Go to the path
   - script: cd cpp
     displayName: 'Go to the c++ directory'
+  # Run make
   - script: make
     displayName: 'Command Line Script: Run make'  
   # Archive files from source directory and save compressed files in artifact staging directory
