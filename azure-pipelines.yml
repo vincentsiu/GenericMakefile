@@ -73,7 +73,7 @@ jobs:
     condition: eq(variables['mountFileShare'], true)
   
   - script: make
-    workingDirectory: $(Build.SourcesDirectory)\cpp
+    workingDirectory: $(Build.SourcesDirectory)/cpp
     displayName: 'Command Line Script: Run make'  
 
   # Archive files from source directory and save compressed files in artifact staging directory
