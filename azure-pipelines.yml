@@ -73,6 +73,9 @@ jobs:
     condition: eq(variables['mountFileShare'], true)
     
   # Run make
+  - script: cd cpp
+    displayName: 'Go to the c++ directory'
+  
   - script: make
     displayName: 'Command Line Script: Run make'  
   
