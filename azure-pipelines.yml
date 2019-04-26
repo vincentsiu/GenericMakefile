@@ -71,12 +71,15 @@ jobs:
       sudo ln -s -f /cif/softwarelib /mnt/software-lib
     displayName: 'Bash Script: Mount File Shares specific for Spinnaker'
     condition: eq(variables['mountFileShare'], true)
+  
   # Go to the path
   - script: cd cpp
     displayName: 'Go to the c++ directory'
+  
   # Run make
   - script: make
     displayName: 'Command Line Script: Run make'  
+  
   # Archive files from source directory and save compressed files in artifact staging directory
   # $(Build.SourcesDirectory): \usr\local\agent_work\1\s
   # $(Build.ArtifactStagingDirectory): \usr\local\agent_work\1\a
@@ -89,6 +92,7 @@ jobs:
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
       replaceExistingArchive: true
+  
   # AzCopy copies artifact from agent to blob for Linux agents
   # Define storage account key in the 'Variables' tab and select it to be secret
   - script: |
@@ -117,11 +121,13 @@ jobs:
       key: '$(removeAgentFuncKey)'
       method: GET
       queryParameters: 'name=buildAgent-$(Build.BuildId)'
+  
   # The delay task is a temporary fix. Currently, delete function exceeds maximum timeout duration.
   - task: Delay@1
     displayName: 'Delay by 17 minutes. Waiting for agent to be deleted from Azure...'
     inputs:
       delayForMinutes: 17
+  
   - task: AzureFunction@1
     displayName: 'Azure Function: Check whether agent has been deleted'
     inputs:
